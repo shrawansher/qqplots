@@ -1,0 +1,35 @@
+---
+title: "qqplots"
+author: "Shrawan Sher"
+date: "3/23/2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+data(mtcars)
+
+mtcars
+mpg <- mtcars$mpg
+n <- length(mpg)
+
+mean.mpg<- mean(mpg)
+std.mpg <- sd(mpg)
+var.mpg <- var(mpg)
+
+prob <- (1:n)/(n+1)
+normal.quantiles = qnorm(prob, mean(mpg), sd(mpg))
+```
+```{r}
+plot(sort(normal.quantiles), sort(mpg) , xlab = 'Theoretical Quantiles from Normal Distribution', ylab = 'Sample Quqnatiles of MPG', main = 'Normal Quantile-Quantile Plot of Mpg')
+abline(0,1)
+
+
+qqnorm(mpg,lwd=4,pch=1)
+qqline(mpg)
+```
+
